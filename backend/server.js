@@ -1,7 +1,11 @@
 const express = require("express");
+const dotenv = require("dotenv");
+
 const { chats } = require("./data/data");
 
 const app = express();
+
+dotenv.config();
 
 app.get("/", (request, response) => {
   response.send("API end point");
@@ -16,4 +20,8 @@ app.get("/api/chat/:id", (request, response) => {
   response.send(singlechat);
 });
 
-app.listen(4000, console.log("server started at 4000"));
+const PORT =
+  process.env.PORT ||
+  4000; /*if PORT varaible is not avaiable use 4000 as port because use or operator(||) */
+
+app.listen(PORT, console.log(`server started at ${PORT}`));
